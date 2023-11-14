@@ -14,11 +14,13 @@ use App\Http\Controllers\TodoController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('todos/mine', [TodoController::class, 'getMyTodos']);
 Route::resource('todos', TodoController::class);
 
+
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
